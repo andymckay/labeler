@@ -1,0 +1,23 @@
+{
+  "name": "labeler",
+  "version": "1.0.0",
+  "description": "Labels issues when they land in a repo.",
+  "main": "label.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andymckay/labeler.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andymckay/labeler/issues"
+  },
+  "homepage": "https://github.com/andymckay/labeler#readme",
+  "dependencies": {
+    "@actions/core": "^1.0.0",
+    "@actions/github": "^1.0.1"
+  }
+}
