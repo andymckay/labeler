@@ -7,9 +7,9 @@ async function label() {
     const context = github.context;
 
     await octokit.issues.update({
-        owner: context.payload.repository.owner.name,
+        owner: context.payload.repository.owner.login,
         repo: context.payload.repository.name,
-        number: context.payload.issue.number,
+        issue_number: context.payload.issue.number,
         labels: ["needs-triage"]
     });
 
