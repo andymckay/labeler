@@ -6,4 +6,4 @@ inputs:
     required: true
 runs:
   using: 'node12'
-  main: 'main.js'
+  main: 'label.js'
