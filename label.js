@@ -2,7 +2,8 @@ const github = require('@actions/github');
 const core = require('@actions/core');
 
 async function label() {
-    const myToken = core.getInput('myToken');
+    const myToken = core.getInput('repo-token');
+    console.log(myToken);
     const octokit = new github.GitHub(myToken);
     const context = github.context;
 
