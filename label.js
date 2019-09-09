@@ -19,6 +19,7 @@ async function label() {
         labels: labels
     });
 
+    return context.payload.issue.number;
 }
 
 label()
