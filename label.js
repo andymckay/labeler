@@ -26,7 +26,7 @@ label()
    .then(
       (result) => {
           if (result) {
-              console.log(`Labelled ${number}`);
+              console.log(`Labelled ${result}`);
           } else {
               console.log(`Needs-triage already exists, no need to add.`);
           }
