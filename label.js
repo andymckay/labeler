@@ -6,19 +6,30 @@ async function label() {
     const octokit = new github.GitHub(myToken);
     const context = github.context;
 
+    let labels = context.payload.issue.labels.map(label => label.name);
+    if (labels.includes["needs-triage"]) {
+        return false;
+    }
+    labels.push("needs-triage");
+
     await octokit.issues.update({
         owner: context.payload.repository.owner.login,
         repo: context.payload.repository.name,
         issue_number: context.payload.issue.number,
-        labels: ["needs-triage"]
+        labels: labels
     });
 
-    return context.payload.issue.number;
 }
 
 label()
    .then(
-      (number) => { console.log(`Labelled ${number}`) },
+      (result) => {
+          if (result) {
+              console.log(`Labelled ${number}`);
+          } else {
+              console.log(`Needs-triage already exists, no need to add.`);
+          }
+      },
       (err)  => { console.log(err) }
    )
    .then(
