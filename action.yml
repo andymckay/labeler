@@ -1,4 +1,4 @@
-name: 'Labeler'
+name: 'Simple Issue Labeler'
 description: 'Adds labels to new issues.'
 inputs:
   repo-token:
