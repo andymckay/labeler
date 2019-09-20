@@ -1,8 +1,8 @@
 name: 'Labeler'
-description: 'Label for pe-actions'
+description: 'Adds labels to new issues.'
 inputs:
-  repo-token:
-    description: 'Token for the repo. Can be passed in using {{ secrets.GITHUB_TOKEN }}'
+  labels:
+    description: 'Labels to add to an issue, seperated by commas.'
     required: true
 runs:
   using: 'node12'
