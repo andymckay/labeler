@@ -13,10 +13,11 @@ async function label() {
 
   let labels = context.payload.issue.labels.map(label => label.name);
   for (let requestedLabel of requested) {
-    if (labels.includes(requestedLabel)) {
+    if (!labels.includes(requestedLabel)) {
       labels.push(requestedLabel);
     }
   }
+
   await octokit.issues.update({
     owner: context.payload.repository.owner.login,
     repo: context.payload.repository.name,
