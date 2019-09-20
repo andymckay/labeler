@@ -9,7 +9,7 @@ To add it to your workflow:
         labels: "needs-triage, bug"
 ```
 
-This adds the `needs-triage` and `bug` issues to the issue. The most common approach is to do this when issues are created, you can do this with the following in your workflow file:
+This adds the `needs-triage` and `bug` labels to the issue. The most common approach is to do this when issues are created, you can do this with the following in your workflow file:
 
 ```
 on: 
