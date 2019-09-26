@@ -1,8 +1,13 @@
 const github = require("@actions/github");
 const core = require("@actions/core");
 
-const requested = core
-  .getInput("labels")
+const labelsToAdd = core
+  .getInput("add-labels")
+  .split(",")
+  .map(x => x.trim());
+
+const labelsToRemove = core
+  .getInput("remove-labels")
   .split(",")
   .map(x => x.trim());
 
@@ -12,11 +17,14 @@ async function label() {
   const context = github.context;
 
   let labels = context.payload.issue.labels.map(label => label.name);
-  for (let requestedLabel of requested) {
-    if (!labels.includes(requestedLabel)) {
-      labels.push(requestedLabel);
+  for (let labelToAdd of labelsToAdd) {
+    if (!labels.includes(labelToAdd)) {
+      labels.push(labelToAdd);
     }
   }
+  labels = labels.filter((value) => {
+    return !labelsToRemove.includes(value);
+  });
 
   await octokit.issues.update({
     owner: context.payload.repository.owner.login,
@@ -30,7 +38,7 @@ async function label() {
 label()
   .then(
     result => {
-      console.log(`Labelled ${result} with ${requested}.`);
+      console.log(`Updated labels in ${result}. Added: ${labelsToAdd}. Removed: ${labelsToRemove}.`);
     },
     err => {
       console.log(err);
