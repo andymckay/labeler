@@ -30,9 +30,11 @@ async function label() {
 label()
   .then(
     result => {
+      // eslint-disable-next-line no-console
       console.log(`Labelled ${result} with ${requested}.`);
     },
     err => {
+      // eslint-disable-next-line no-console
       console.log(err);
     }
   )
