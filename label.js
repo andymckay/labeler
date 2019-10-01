@@ -38,9 +38,11 @@ async function label() {
 label()
   .then(
     result => {
+      // eslint-disable-next-line no-console
       console.log(`Updated labels in ${result}. Added: ${labelsToAdd}. Removed: ${labelsToRemove}.`);
     },
     err => {
+      // eslint-disable-next-line no-console
       console.log(err);
     }
   )
