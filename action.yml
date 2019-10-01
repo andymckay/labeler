@@ -1,12 +1,15 @@
 name: 'Simple Issue Labeler'
-description: 'Adds labels to new issues.'
+description: 'Adds and removes labels from issues.'
 inputs:
   repo-token:
     description: 'Token for the repo. Can be passed in using {{ secrets.GITHUB_TOKEN }}'
     required: true
-  labels:
+  add-labels:
     description: 'Labels to add to an issue, seperated by commas.'
-    required: true
+    required: false
+  remove-labels:
+    description: 'Labels to be removed from an issue, seperated by commas.'
+    required: false
 branding:
   icon: zap-off
   color: orange
