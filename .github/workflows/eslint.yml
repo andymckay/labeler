@@ -1,0 +1,16 @@
+name: eslint
+on: [pull_request]
+
+jobs:
+
+  build:
+    name: eslint
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@master
+
+    - name: eslint
+      run: |
+        npm install
+        npm run-script lint
