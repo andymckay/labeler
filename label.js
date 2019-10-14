@@ -30,7 +30,7 @@ async function label() {
 
   console.log(updatedIssueInformation);
 
-  let labels = updatedIssueInformation.labels.map(label => label.name);
+  let labels = updatedIssueInformation.data.labels.map(label => label.name);
   for (let labelToAdd of labelsToAdd) {
     if (!labels.includes(labelToAdd)) {
       labels.push(labelToAdd);
