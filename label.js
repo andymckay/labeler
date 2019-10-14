@@ -17,7 +17,7 @@ async function label() {
   const context = github.context;
 
   const repoName = context.payload.repository.name;
-  const ownerName = context.payload.owner.login;
+  const ownerName = context.payload.repository.owner.login;
   const issueNumber = context.payload.issue.number;
 
   // query for the most recent information about the issue. Between the issue being created and
