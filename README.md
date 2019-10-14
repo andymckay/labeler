@@ -18,7 +18,7 @@ on:
     types: [opened]
 ```
 
-`Ignore-if-assigned` checks at the time of the action running if the issue has been assigned to anyone. If set to `True` and the issue is assigned to anyone, then no labels will be added or removed. This can be helpful for new issues that immediatly get labels or assignees and don't require any action to be taken.
+The parameter `ignore-if-assigned` checks at the time of the action running if the issue has been assigned to anyone. If set to `True` and the issue is assigned to anyone, then no labels will be added or removed. This can be helpful for new issues that immediatly get labels or assignees and don't require any action to be taken.
 
 This action can also be used to remove labels from an issue. Just pass the label(s) to be removed separated by commas.
 
