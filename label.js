@@ -16,7 +16,19 @@ async function label() {
   const octokit = new github.GitHub(myToken);
   const context = github.context;
 
-  let labels = context.payload.issue.labels.map(label => label.name);
+  const repoName = context.payload.repository.name;
+  const ownerName = context.payload.owner.login;
+  const issueNumber = context.payload.issue.number;
+
+  // query for the most recent information about the issue. Between the issue being created and
+  // the action running, labels or asignees could have been added
+  var updatedIssueInformation = await octokit.issues.get({
+    owner: ownerName,
+    repo: repoName,
+    issue_number: issueNumber
+  })
+
+  let labels = updatedIssueInformation.labels.map(label => label.name);
   for (let labelToAdd of labelsToAdd) {
     if (!labels.includes(labelToAdd)) {
       labels.push(labelToAdd);
