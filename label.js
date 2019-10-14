@@ -28,6 +28,8 @@ async function label() {
     issue_number: issueNumber
   })
 
+  console.log(updatedIssueInformation);
+
   let labels = updatedIssueInformation.labels.map(label => label.name);
   for (let labelToAdd of labelsToAdd) {
     if (!labels.includes(labelToAdd)) {
