@@ -10,6 +10,9 @@ inputs:
   remove-labels:
     description: 'Labels to be removed from an issue, seperated by commas.'
     required: false
+  ignore-if-assigned:
+    description: "True/False value to indicate if no labels should be added or removed if there is an asignee to the issue"
+    required: false
 branding:
   icon: zap-off
   color: orange

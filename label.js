@@ -13,9 +13,9 @@ const labelsToRemove = core
 
 async function label() {
   const myToken = core.getInput("repo-token");
+  const ignoreIfAssigned = core.getInput("ignore-if-assigned");
   const octokit = new github.GitHub(myToken);
   const context = github.context;
-
   const repoName = context.payload.repository.name;
   const ownerName = context.payload.repository.owner.login;
   const issueNumber = context.payload.issue.number;
@@ -28,7 +28,12 @@ async function label() {
     issue_number: issueNumber
   })
 
-  console.log(updatedIssueInformation);
+  if(typeof(ignoreIfAssigned) !== undefined && ignoreIfAssigned == 'True'){
+    // check if the issue has been assigned to anyone
+    if(updatedIssueInformation.data.assignees.length != 0){
+      return "No action being taken. Ignoring because one or more assignees have been added to the issue";
+    }
+  }
 
   let labels = updatedIssueInformation.data.labels.map(label => label.name);
   for (let labelToAdd of labelsToAdd) {
@@ -41,19 +46,19 @@ async function label() {
   });
 
   await octokit.issues.update({
-    owner: context.payload.repository.owner.login,
-    repo: context.payload.repository.name,
-    issue_number: context.payload.issue.number,
+    owner: ownerName,
+    repo: repoName,
+    issue_number: issueNumber,
     labels: labels
   });
-  return context.payload.issue.number;
+  return `Updated labels in ${context.payload.issue.number}. Added: ${labelsToAdd}. Removed: ${labelsToRemove}.`
 }
 
 label()
   .then(
     result => {
       // eslint-disable-next-line no-console
-      console.log(`Updated labels in ${result}. Added: ${labelsToAdd}. Removed: ${labelsToRemove}.`);
+      console.log(result);
     },
     err => {
       // eslint-disable-next-line no-console
