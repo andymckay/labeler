@@ -26,11 +26,11 @@ async function label() {
     owner: ownerName,
     repo: repoName,
     issue_number: issueNumber
-  })
+  });
 
-  if(typeof(ignoreIfAssigned) !== undefined && ignoreIfAssigned == 'True'){
+  if (typeof ignoreIfAssigned !== undefined && ignoreIfAssigned == "True") {
     // check if the issue has been assigned to anyone
-    if(updatedIssueInformation.data.assignees.length != 0){
+    if (updatedIssueInformation.data.assignees.length != 0) {
       return "No action being taken. Ignoring because one or more assignees have been added to the issue";
     }
   }
@@ -41,7 +41,7 @@ async function label() {
       labels.push(labelToAdd);
     }
   }
-  labels = labels.filter((value) => {
+  labels = labels.filter(value => {
     return !labelsToRemove.includes(value);
   });
 
@@ -51,7 +51,7 @@ async function label() {
     issue_number: issueNumber,
     labels: labels
   });
-  return `Updated labels in ${context.payload.issue.number}. Added: ${labelsToAdd}. Removed: ${labelsToRemove}.`
+  return `Updated labels in ${context.payload.issue.number}. Added: ${labelsToAdd}. Removed: ${labelsToRemove}.`;
 }
 
 label()
