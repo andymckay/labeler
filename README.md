@@ -7,7 +7,7 @@ To add it to your workflow:
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         add-labels: "needs-triage, bug"
-        ignore-if-assigned: "True"
+        ignore-if-assigned: true
 ```
 
 This adds the `needs-triage` and `bug` labels to the issue. The most common approach is to do this when issues are created, you can do this with the following in your workflow file:
@@ -27,7 +27,7 @@ This action can also be used to remove labels from an issue. Just pass the label
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         remove-labels: "help-wanted"
-        ignore-if-assigned: "False"
+        ignore-if-assigned: false
 ```
 
 An example use-case would be, to remove the `help-wanted` label when an issue is assigned to someone. For this, the workflow file would look like:

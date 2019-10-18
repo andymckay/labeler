@@ -28,7 +28,7 @@ async function label() {
     issue_number: issueNumber
   });
 
-  if (typeof ignoreIfAssigned !== undefined && ignoreIfAssigned == "True") {
+  if (ignoreIfAssigned) {
     // check if the issue has been assigned to anyone
     if (updatedIssueInformation.data.assignees.length != 0) {
       return "No action being taken. Ignoring because one or more assignees have been added to the issue";
