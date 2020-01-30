@@ -1,7 +1,7 @@
 const github = require("@actions/github");
 const core = require("@actions/core");
 
-const labelsToAdd = core
+let labelsToAdd = core
   .getInput("add-labels")
   .split(",")
   .map(x => x.trim());
@@ -37,12 +37,12 @@ async function label() {
   }
 
   let labels = updatedIssueInformation.data.labels.map(label => label.name);
-  const skipAddingLabels = ignoreAddIfLabeled && labels.length > 0;
-  if (!skipAddingLabels) {
-    for (let labelToAdd of labelsToAdd) {
-      if (!labels.includes(labelToAdd)) {
-        labels.push(labelToAdd);
-      }
+  if (ignoreAddIfLabeled && labels.length > 0) {
+    labelsToAdd = [];
+  }
+  for (let labelToAdd of labelsToAdd) {
+    if (!labels.includes(labelToAdd)) {
+      labels.push(labelToAdd);
     }
   }
   labels = labels.filter(value => {
