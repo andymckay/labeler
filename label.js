@@ -14,6 +14,7 @@ const labelsToRemove = core
 async function label() {
   const myToken = core.getInput("repo-token");
   const ignoreIfAssigned = core.getInput("ignore-if-assigned");
+  const ignoreAddIfLabeled = core.getInput("ignore-add-if-labeled");
   const octokit = new github.GitHub(myToken);
   const context = github.context;
   const repoName = context.payload.repository.name;
@@ -30,15 +31,17 @@ async function label() {
 
   if (ignoreIfAssigned) {
     // check if the issue has been assigned to anyone
-    if (updatedIssueInformation.data.assignees.length != 0) {
+    if (updatedIssueInformation.data.assignees.length !== 0) {
       return "No action being taken. Ignoring because one or more assignees have been added to the issue";
     }
   }
 
   let labels = updatedIssueInformation.data.labels.map(label => label.name);
-  for (let labelToAdd of labelsToAdd) {
-    if (!labels.includes(labelToAdd)) {
-      labels.push(labelToAdd);
+  if (!ignoreAddIfLabeled) {
+    for (let labelToAdd of labelsToAdd) {
+      if (!labels.includes(labelToAdd)) {
+        labels.push(labelToAdd);
+      }
     }
   }
   labels = labels.filter(value => {
