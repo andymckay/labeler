@@ -37,7 +37,7 @@ async function label() {
   }
 
   let labels = updatedIssueInformation.data.labels.map(label => label.name);
-  const skipAddingLabels = ignoreAddIfLabeled && labels;
+  const skipAddingLabels = ignoreAddIfLabeled && labels.length > 0;
   if (!skipAddingLabels) {
     for (let labelToAdd of labelsToAdd) {
       if (!labels.includes(labelToAdd)) {
