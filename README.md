@@ -3,7 +3,7 @@ Automatically adds or removes labels from issues. You define the labels you'd li
 To add it to your workflow:
 
 ```
-    - uses: andymckay/labeler@1.0.0
+    - uses: andymckay/labeler@1.0.2
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         add-labels: "needs-triage, bug"
@@ -23,7 +23,7 @@ The parameter `ignore-if-assigned` checks at the time of the action running if t
 This action can also be used to remove labels from an issue. Just pass the label(s) to be removed separated by commas.
 
 ```
-    - uses: andymckay/labeler@1.0.0
+    - uses: andymckay/labeler@1.0.2
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         remove-labels: "help-wanted"
