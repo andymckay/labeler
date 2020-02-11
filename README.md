@@ -24,7 +24,6 @@ This action can also be used to remove labels from an issue. Just pass the label
 
 ```yml
     - uses: andymckay/labeler@1.0.2
-    - uses: andymckay/labeler@1.0.2
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         remove-labels: "help-wanted"
