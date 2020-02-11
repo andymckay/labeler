@@ -1,7 +1,7 @@
 const github = require("@actions/github");
 const core = require("@actions/core");
 
-let labelsToAdd = core
+const labelsToAdd = core
   .getInput("add-labels")
   .split(",")
   .map(x => x.trim());
