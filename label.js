@@ -19,7 +19,9 @@ async function label() {
   const context = github.context;
   const repoName = context.payload.repository.name;
   const ownerName = context.payload.repository.owner.login;
-  const issueNumber = context.payload.issue.number;
+  const issueNumber = context.payload.issue !== undefined
+     ? context.payload.issue.number
+     : context.payload.pull_request.number;
 
   // query for the most recent information about the issue. Between the issue being created and
   // the action running, labels or asignees could have been added
@@ -58,7 +60,7 @@ async function label() {
     issue_number: issueNumber,
     labels: labels
   });
-  return `Updated labels in ${context.payload.issue.number}. Added: ${labelsToAdd}. Removed: ${labelsToRemove}.`;
+  return `Updated labels in ${issueNumber}. Added: ${labelsToAdd}. Removed: ${labelsToRemove}.`;
 }
 
 label()
