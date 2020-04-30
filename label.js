@@ -19,9 +19,13 @@ async function label() {
   const context = github.context;
   const repoName = context.payload.repository.name;
   const ownerName = context.payload.repository.owner.login;
-  const issueNumber = context.payload.issue !== undefined
-     ? context.payload.issue.number
-     : context.payload.pull_request.number;
+  var issueNumber;
+
+  if (context.payload.issue !== undefined) {
+    issueNumber = context.payload.issue.number;
+  } else {
+    issueNumber = context.payload.pull_request.number;
+  }
 
   // query for the most recent information about the issue. Between the issue being created and
   // the action running, labels or asignees could have been added
