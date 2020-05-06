@@ -19,6 +19,7 @@ remove-labels: 'label1, label2'
 ```
 
 ### Events, add-labels & remove-labels
+`add-labels` and `remove-labels` may be used together. 
 
 ```yml
 name: issue-automation
@@ -49,7 +50,11 @@ This runs on 3 types of events:
 - `pull_request` creation
 - `project_card` move
 
-This adds the labels `needs-triage` and `bug` and removes the label `in progress`.
+This adds the labels:
+- `needs-triage`
+- `bug` 
+
+And removes the label `in progress`.
 
 ### ignore-if-assigned
 
