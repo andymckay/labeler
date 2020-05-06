@@ -23,14 +23,14 @@ async function label() {
 
   if (context.payload.issue !== undefined) {
     issueNumber = context.payload.issue.number;
-  } 
+  }
   else if (context.payload.pull_request !== undefined) {
     issueNumber = context.payload.pull_request.number;
   }
   else if (context.payload.project_card !== undefined) {
     var issuesUrl = context.payload.project_card.issues_url;
     var urlArray = issuesUrl.split("/");
-    issueNumber = urlArray[urlArray.length-1];
+    issueNumber = urlArray[urlArray.length - 1];
     if (issueNumber == "issues") {
       issueNumber = undefined;
     }
