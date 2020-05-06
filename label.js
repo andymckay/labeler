@@ -28,11 +28,11 @@ async function label() {
     issueNumber = context.payload.pull_request.number;
   }
   else if (context.payload.project_card !== undefined) {
-    issuesUrl = context.payload.project_card.issues_url;
-    urlArray = issuesUrl.split('/');
+    var issuesUrl = context.payload.project_card.issues_url;
+    var urlArray = issuesUrl.split("/");
     issueNumber = urlArray[urlArray.length-1];
-    if (issueNumber == 'issues'){
-      issueNumber = undefined
+    if (issueNumber == "issues") {
+      issueNumber = undefined;
     }
   }
 
