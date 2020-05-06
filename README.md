@@ -1,5 +1,4 @@
-# Intro
-Automatically adds or removes labels from issues. You define the labels you'd like to add and/or remove in the YAML file. You can also specify if an issue should be ignored if an assignee has been added.
+Automatically adds or removes labels from issues, pull requests and project cards.
 
 
 ## Supported Github events
@@ -7,19 +6,24 @@ Automatically adds or removes labels from issues. You define the labels you'd li
 - 'pull_request'
 - 'project_card'
 
+## repo-token
+Some github access token is needed since this action uses the github api. See the (oficial documentation)[https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line] for more info.
 
-## Examples
 
-### labels
-`add-labels` and `remove-labels` may receive multiple labels separated by commas.
+## add-labels & remove-labels
+to add or remove labels the parameters are:
+- `add-labels`
+- `remove-labels` 
+
+They may receive multiple labels separated by commas.
+They also may be used together. 
 
 ```yml
 add-labels: 'label1, label2'
 remove-labels: 'label1, label2'
 ```
 
-### Events, add-labels & remove-labels
-`add-labels` and `remove-labels` may be used together. 
+## Complete 'basic' usage
 
 ```yml
 name: issue-automation
@@ -56,7 +60,7 @@ This adds the labels:
 
 And removes the label `in progress`.
 
-### ignore-if-assigned
+## ignore-if-assigned
 
 The parameter `ignore-if-assigned` checks at the time of the action running if the issue has been assigned to anyone. If set to `True` and the issue is assigned to anyone, then no labels will be added or removed. This can be helpful for new issues that immediatly get labels or assignees and don't require any action to be taken.
 
@@ -80,7 +84,7 @@ jobs:
           ignore-if-assigned: false
 ```
 
-### ignore-if-labeled
+## ignore-if-labeled
 
 The parameter `ignore-if-labeled` checks at the time of the action running if the issue has been labeled. If set to `True` and the issue is labeled, then no labels will be added or removed. This can be helpful for new issues that immediatly get labels or assignees and don't require any action to be taken.
 
