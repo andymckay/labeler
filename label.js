@@ -23,8 +23,17 @@ async function label() {
 
   if (context.payload.issue !== undefined) {
     issueNumber = context.payload.issue.number;
-  } else {
+  } 
+  else if (context.payload.pull_request !== undefined) {
     issueNumber = context.payload.pull_request.number;
+  }
+  else if (context.payload.project_card !== undefined) {
+    issuesUrl = context.payload.project_card.issues_url;
+    urlArray = issuesUrl.split('/');
+    issueNumber = urlArray[urlArray.length-1];
+    if (issueNumber == 'issues'){
+      issueNumber = undefined
+    }
   }
 
   // query for the most recent information about the issue. Between the issue being created and
