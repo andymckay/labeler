@@ -7,7 +7,7 @@ Automatically adds or removes labels from issues, pull requests and project card
 - 'project_card'
 
 ## repo-token
-Some github access token is needed since this action uses the github api. See the (oficial documentation)[https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line] for more info.
+Some github access token is needed since this action uses the github api. See the [oficial documentation](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) for more info.
 
 
 ## add-labels & remove-labels
