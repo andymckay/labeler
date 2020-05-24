@@ -16,6 +16,9 @@ inputs:
   ignore-if-labeled:
     description: "True/False value to indicate if no labels should be added or removed if the issue already has labels."
     required: false
+  team: 
+    description: "Only label issues and pull requests by external contributors. If the author is a team member, the action ignores opened pull requests and issues."
+    required: false
 branding:
   icon: zap-off
   color: orange

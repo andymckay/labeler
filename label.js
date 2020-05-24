@@ -20,14 +20,33 @@ async function label() {
   const repoName = context.payload.repository.name;
   const ownerName = context.payload.repository.owner.login;
   const issueNumber = context.payload.issue.number;
+  const team = core.getInput("team");
 
   // query for the most recent information about the issue. Between the issue being created and
   // the action running, labels or asignees could have been added
-  var updatedIssueInformation = await octokit.issues.get({
+  let updatedIssueInformation = await octokit.issues.get({
     owner: ownerName,
     repo: repoName,
     issue_number: issueNumber
   });
+  console.log(updatedIssueInformation);
+
+  if (team) {
+    const org = team.split("/").shift();
+    console.log(`org: ${org}`);
+    const teamMembers = await octokit.teams.listMembersInOrg({
+      org: org,
+      team_slug: team
+    });
+    const logins = teamMembers.data.map(member => member.login);
+    console.log(logins);
+    for (let login of logins) {
+      console.log(`login: ${login}`);
+      if (login === updatedIssueInformation.data.user.login) {
+        return `No action being taken. Ignoring because the author of the issue or pull request is part of the ${team} team`;
+      }
+    }
+  }
 
   if (ignoreIfAssigned) {
     // check if the issue has been assigned to anyone
