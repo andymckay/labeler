@@ -20,7 +20,7 @@ They also may be used together.
 
 ```yml
 add-labels: 'label1, label2'
-remove-labels: 'label1, label2'
+remove-labels: 'label3, label4'
 ```
 
 ## Complete 'basic' usage
