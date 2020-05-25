@@ -77,7 +77,7 @@ jobs:
   automate-issues-labels:
     runs-on: ubuntu-latest
     steps:
-      - uses: andymckay/labeler@1.0.2
+      - uses: andymckay/labeler@master
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           remove-labels: "help-wanted"
