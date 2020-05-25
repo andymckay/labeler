@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: initial labeling
-        uses: andymckay/labeler@1.0.2
+        uses: andymckay/labeler@master
         with:
           repo-token: ${{secrets.GH_TOKEN}}
           add-labels: "needs-triage, bug"
