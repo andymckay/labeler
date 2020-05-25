@@ -26,9 +26,7 @@ async function label() {
   } else if (context.payload.pull_request !== undefined) {
     issueNumber = context.payload.pull_request.number;
   } else if (context.payload.project_card !== undefined) {
-    var issuesUrl = context.payload.project_card.issues_url;
-    var urlArray = issuesUrl.split("/");
-    issueNumber = urlArray[urlArray.length - 1];
+    issueNumber = context.payload.project_card.issues_url.split("/").pop()
     if (issueNumber == "issues") {
       issueNumber = undefined;
     }
