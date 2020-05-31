@@ -36,9 +36,9 @@ async function label() {
     return "No action being taken. Ignoring because issueNumber was not identified";
   }
 
-  labelsToAdd = labelsToAdd.filter(value => ![''].includes(value))
+  labelsToAdd = labelsToAdd.filter(value => ![""].includes(value));
 
-  labelsToRemove = labelsToRemove.filter(value => ![''].includes(value))
+  labelsToRemove = labelsToRemove.filter(value => ![""].includes(value));
 
   // query for the most recent information about the issue. Between the issue being created and
   // the action running, labels or asignees could have been added
