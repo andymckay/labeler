@@ -25,11 +25,12 @@ async function label() {
     issueNumber = context.payload.issue.number;
   } else if (context.payload.pull_request !== undefined) {
     issueNumber = context.payload.pull_request.number;
-  } else if (context.payload.project_card !== undefined) {
-    issueNumber = context.payload.project_card.issues_url.split("/").pop()
-    if (issueNumber == "issues") {
-      issueNumber = undefined;
-    }
+  } else if (context.payload.project_card !== undefined && context.payload.project_card.content_url) {
+    issueNumber = context.payload.project_card.content_url.split("/").pop();
+  }
+
+  if (issueNumber === undefined) {
+    return "No action being taken. Ignoring because issueNumber was not identified";
   }
 
   // query for the most recent information about the issue. Between the issue being created and
