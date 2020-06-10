@@ -1,12 +1,12 @@
 const github = require("@actions/github");
 const core = require("@actions/core");
 
-const labelsToAdd = core
+var labelsToAdd = core
   .getInput("add-labels")
   .split(",")
   .map(x => x.trim());
 
-const labelsToRemove = core
+var labelsToRemove = core
   .getInput("remove-labels")
   .split(",")
   .map(x => x.trim());
@@ -23,9 +23,22 @@ async function label() {
 
   if (context.payload.issue !== undefined) {
     issueNumber = context.payload.issue.number;
-  } else {
+  } else if (context.payload.pull_request !== undefined) {
     issueNumber = context.payload.pull_request.number;
+  } else if (
+    context.payload.project_card !== undefined &&
+    context.payload.project_card.content_url
+  ) {
+    issueNumber = context.payload.project_card.content_url.split("/").pop();
   }
+
+  if (issueNumber === undefined) {
+    return "No action being taken. Ignoring because issueNumber was not identified";
+  }
+
+  labelsToAdd = labelsToAdd.filter(value => ![""].includes(value));
+
+  labelsToRemove = labelsToRemove.filter(value => ![""].includes(value));
 
   // query for the most recent information about the issue. Between the issue being created and
   // the action running, labels or asignees could have been added
@@ -54,9 +67,8 @@ async function label() {
       labels.push(labelToAdd);
     }
   }
-  labels = labels.filter(value => {
-    return !labelsToRemove.includes(value);
-  });
+
+  labels = labels.filter(value => !labelsToRemove.includes(value));
 
   await octokit.issues.update({
     owner: ownerName,
