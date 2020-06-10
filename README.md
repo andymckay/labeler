@@ -2,9 +2,9 @@ Automatically adds or removes labels from issues, pull requests and project card
 
 
 ## Supported Github events
-- 'issues'
-- 'pull_request'
-- 'project_card'
+- `issues`
+- `pull_request`
+- `project_card`
 
 ## add-labels & remove-labels
 to add or remove labels the parameters are:
