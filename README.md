@@ -2,13 +2,9 @@ Automatically adds or removes labels from issues, pull requests and project card
 
 
 ## Supported Github events
-- 'issues'
-- 'pull_request'
-- 'project_card'
-
-## repo-token
-To use this action a github access token is required since the github api is used. See the [oficial documentation](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) for more info.
-
+- `issues`
+- `pull_request`
+- `project_card`
 
 ## add-labels & remove-labels
 to add or remove labels the parameters are:
@@ -43,7 +39,6 @@ jobs:
       - name: initial labeling
         uses: andymckay/labeler@master
         with:
-          repo-token: ${{secrets.GH_TOKEN}}
           add-labels: "needs-triage, bug"
           remove-labels: "in progress"
 
@@ -79,7 +74,6 @@ jobs:
     steps:
       - uses: andymckay/labeler@master
         with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
           remove-labels: "help-wanted"
           ignore-if-assigned: false
 ```
@@ -103,7 +97,6 @@ jobs:
     steps:
       - uses: andymckay/labeler@1.0.2
         with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
           add-labels: "needs-triage"
           ignore-if-labeled: true
 ```
