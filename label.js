@@ -60,19 +60,17 @@ async function label() {
   let labels = updatedIssueInformation.data.labels.map(label => label.name);
   if (ignoreIfLabeled) {
     if (labels.length !== 0) {
-      return "No action being taken. Ignoring because one or labels have been added to the issue";
+      return "No action being taken. Ignoring because one or more labels have been added to the issue";
     }
   }
 
   for (let labelToAdd of labelsToAdd) {
-    if (!labels.includes(labelToAdd)) {
+    if (!labels.includes(labelToAdd) && labelToAdd !== "") {
       labels.push(labelToAdd);
     }
   }
-  labels = labels.filter(value => {
-    return !labelsToRemove.includes(value);
-  });
 
+  labels = labels.filter(value => !labelsToRemove.includes(value));
   await octokit.issues.update({
     owner: ownerName,
     repo: repoName,
