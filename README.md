@@ -5,7 +5,7 @@ Automatically adds or removes labels from issues, pull requests and project card
 - `issues`
 - `pull_request`
 - `project_card`
-- If you manually specificy the issue/pull request number then it can be used in other event types
+- If you manually specify the issue/pull request number then it can be used in other event types
 
 ## add-labels & remove-labels
 to add or remove labels the parameters are:
