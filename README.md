@@ -5,6 +5,7 @@ Automatically adds or removes labels from issues, pull requests and project card
 - `issues`
 - `pull_request`
 - `project_card`
+- If you manually specificy the issue/pull request number then it can be used in other event types
 
 ## add-labels & remove-labels
 to add or remove labels the parameters are:
@@ -99,4 +100,33 @@ jobs:
         with:
           add-labels: "needs-triage"
           ignore-if-labeled: true
+```
+
+## Override issue/pull request number
+
+If you specify the `number` parameter, then the issue/pull request number is override and not automatically determined by the event type. This allows you to use the action in other events.
+
+```yml
+name: issue-automation
+
+on:
+  workflow_dispatch:
+    inputs:
+      number:
+        description: 'Issue or pull request number'     
+        required: true
+      addLabels:
+        description: 'Labels to add'        
+      removeLabels:
+        description: 'Labels to remove'        
+
+jobs:
+  manuall-assign-issues-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: initial labeling
+        uses: andymckay/labeler@master
+        with:
+          add-labels: "${{ github.event.inputs.addLabels }}"
+          remove-labels: "${{ github.event.inputs.removeLabels }}"
 ```

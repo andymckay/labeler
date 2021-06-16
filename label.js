@@ -15,13 +15,17 @@ async function label() {
   const myToken = core.getInput("repo-token");
   const ignoreIfAssigned = core.getInput("ignore-if-assigned");
   const ignoreIfLabeled = core.getInput("ignore-if-labeled");
+  const overrideNumber = core.getInput("number");
   const octokit = new github.GitHub(myToken);
   const context = github.context;
   const repoName = context.payload.repository.name;
   const ownerName = context.payload.repository.owner.login;
+  
   var issueNumber;
 
-  if (context.payload.issue !== undefined) {
+  if (overrideNumber !== "") {
+    issueNumber = overrideNumber
+  } else if (context.payload.issue !== undefined) {
     issueNumber = context.payload.issue.number;
   } else if (context.payload.pull_request !== undefined) {
     issueNumber = context.payload.pull_request.number;
