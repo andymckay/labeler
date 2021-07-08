@@ -17,6 +17,9 @@ inputs:
   ignore-if-labeled:
     description: "True/False value to indicate if no labels should be added or removed if the issue already has labels."
     required: false
+  issue-number:
+    description: "An issue number or PR number or project card number. Optional, if not specified, will use the one available in github event `github.event.pull_request` or `github.event.issue`"
+    required: false
 branding:
   icon: zap-off
   color: orange
