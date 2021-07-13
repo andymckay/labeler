@@ -11,6 +11,34 @@ var labelsToRemove = core
   .split(",")
   .map(x => x.trim());
 
+/**
+ * Obtain the issue number either from input or from the context
+ * @param core - the core object
+ * @param context - the context object
+ * @returns {*|number} - issue/card/pr number if not provided by user.
+ */
+function getIssueNumber(core, context) {
+  let issueNumber = core.getInput("issue-number");
+
+  // return what is provided
+  if (issueNumber) return issueNumber;
+
+  // return the one found in issue
+  issueNumber = context.payload.issue && context.payload.issue.number;
+  if (issueNumber) return issueNumber;
+
+  // return the one found in PR
+  issueNumber =
+    context.payload.pull_request && context.payload.issue.pull_request;
+  if (issueNumber) return issueNumber;
+
+  let card_url =
+    context.payload.project_card && context.payload.project_card.content_url;
+  issueNumber = card_url && card_url.split("/").pop();
+
+  return issueNumber;
+}
+
 async function label() {
   const myToken = core.getInput("repo-token");
   const ignoreIfAssigned = core.getInput("ignore-if-assigned");
@@ -19,18 +47,7 @@ async function label() {
   const context = github.context;
   const repoName = context.payload.repository.name;
   const ownerName = context.payload.repository.owner.login;
-  var issueNumber;
-
-  if (context.payload.issue !== undefined) {
-    issueNumber = context.payload.issue.number;
-  } else if (context.payload.pull_request !== undefined) {
-    issueNumber = context.payload.pull_request.number;
-  } else if (
-    context.payload.project_card !== undefined &&
-    context.payload.project_card.content_url
-  ) {
-    issueNumber = context.payload.project_card.content_url.split("/").pop();
-  }
+  let issueNumber = getIssueNumber(core, context);
 
   if (issueNumber === undefined) {
     return "No action being taken. Ignoring because issueNumber was not identified";
