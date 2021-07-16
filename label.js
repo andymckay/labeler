@@ -43,7 +43,7 @@ async function label() {
   const myToken = core.getInput("repo-token");
   const ignoreIfAssigned = core.getInput("ignore-if-assigned");
   const ignoreIfLabeled = core.getInput("ignore-if-labeled");
-  const octokit = new github.GitHub(myToken);
+  const octokit = new github.getOctokit(myToken);
   const context = github.context;
   const repoName = context.payload.repository.name;
   const ownerName = context.payload.repository.owner.login;
