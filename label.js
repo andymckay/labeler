@@ -29,7 +29,7 @@ function getIssueNumber(core, context) {
 
   // return the one found in PR
   issueNumber =
-    context.payload.pull_request && context.payload.issue.pull_request;
+    context.payload.pull_request && context.payload.pull_request.number;
   if (issueNumber) return issueNumber;
 
   let card_url =
@@ -43,7 +43,7 @@ async function label() {
   const myToken = core.getInput("repo-token");
   const ignoreIfAssigned = core.getInput("ignore-if-assigned");
   const ignoreIfLabeled = core.getInput("ignore-if-labeled");
-  const octokit = new github.GitHub(myToken);
+  const octokit = new github.getOctokit(myToken);
   const context = github.context;
   const repoName = context.payload.repository.name;
   const ownerName = context.payload.repository.owner.login;
