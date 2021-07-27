@@ -29,7 +29,7 @@ function getIssueNumber(core, context) {
 
   // return the one found in PR
   issueNumber =
-    context.payload.pull_request && context.payload.issue.pull_request;
+    context.payload.pull_request && context.payload.pull_request.number;
   if (issueNumber) return issueNumber;
 
   let card_url =
