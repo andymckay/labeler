@@ -13,7 +13,7 @@ inputs:
     required: false
   ignore-if-assigned:
     description: "True/False value to indicate if no labels should be added or removed if there is an assignee to the issue."
-    required: true
+    required: false
   ignore-if-labeled:
     description: "True/False value to indicate if no labels should be added or removed if the issue already has labels."
     required: false
