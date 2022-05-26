@@ -1,0 +1,16 @@
+name: Tag Milestone
+
+on:
+  issues:
+    types:
+      - closed
+
+jobs:
+  milestone:
+    runs-on: ubuntu-latest
+    if: github.actor == 'xyz'
+    steps:
+      - name: Tag Milestone
+        uses: gabrielluong/milestone@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
