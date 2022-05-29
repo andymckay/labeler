@@ -1,0 +1,15 @@
+name: Issue Linker
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  issue_linker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Issue Linker
+        uses: gabrielluong/issue-linker@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
