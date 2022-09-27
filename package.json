@@ -1,6 +1,6 @@
 {
   "name": "labeler",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Labels issues when they land in a repo.",
   "main": "label.js",
   "scripts": {

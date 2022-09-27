@@ -85,14 +85,22 @@ async function label() {
     }
   }
 
-  labels = labels.filter(value => !labelsToRemove.includes(value));
-
-  await octokit.issues.update({
-    owner: ownerName,
-    repo: repoName,
-    issue_number: issueNumber,
-    labels: labels
-  });
+  if (labelsToRemove.length != 0) {
+    labels = labels.filter(value => !labelsToRemove.includes(value));
+    await octokit.issues.update({
+      owner: ownerName,
+      repo: repoName,
+      issue_number: issueNumber,
+      labels: labels
+    });
+  } else {
+    await octokit.issues.addLabels({
+      owner: ownerName,
+      repo: repoName,
+      issue_number: issueNumber,
+      labels: labels
+    });
+  }
   return `Updated labels in ${issueNumber}. Added: ${labelsToAdd}. Removed: ${labelsToRemove}.`;
 }
 
